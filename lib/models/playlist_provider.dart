@@ -8,13 +8,12 @@ class PlaylistProvider extends ChangeNotifier {
         songName: "Bad energy",
         artistName: "Skepta and Wizkid",
         albumArtImagePath: "assets/images/images (16).jpeg",
-        audiopath: "assets/audio/01 Skepta - Energy (Stay Far Away).mp3"),
+        audioPath: "assets/audio/Energy(StayFarAway).mp3"),
     Song(
         songName: "Bloody Samarithan",
         artistName: "Ayra Starr",
         albumArtImagePath: "assets/images/FcyxoSIXgAAL9ZZ.jfif",
-        audiopath:
-            "assets/audio/Ayra Starr - Bloody Samaritan (NetNaija.com).mp3"),
+        audioPath: "assets/audio/BloodySamaritan.mp3"),
   ];
 
   // current song playing index
@@ -41,7 +40,7 @@ class PlaylistProvider extends ChangeNotifier {
 
   // play the song
   void play() async {
-    final String path = _playlist[_currentSongIndex!].audiopath;
+    final String path = _playlist[_currentSongIndex!].audioPath;
     await _audioPlayer.stop();
     await _audioPlayer.play(AssetSource(path));
     _isplaying = true;
@@ -93,6 +92,7 @@ class PlaylistProvider extends ChangeNotifier {
   // play previous song
   void playPreviousSong() async {
     if (_currentDuration.inSeconds > 5) {
+      seek(Duration.zero);
     } else {
       if (_currentSongIndex! > 0) {
         currentSongIndex = _currentSongIndex! - 1;
